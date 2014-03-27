@@ -33,17 +33,17 @@ window.onload = function(){
 
       document.getElementById('yourColor').style.backgroundColor = 'rgb(0,0,0)';
 
-      document.getElementById('result').innerHTML = "";
-      document.getElementById('resultText').innerHTML = "";
-      document.getElementById('helpText').innerHTML = "";
+      // document.getElementById('result').innerHTML = "";
+      // document.getElementById('resultText').innerHTML = "";
+      // document.getElementById('helpText').innerHTML = "";
 
       r = 0;
       g = 0;
       b = 0;
 
-      // document.getElementById('red').innerHTML = r;
-      // document.getElementById('green').innerHTML = g;
-      // document.getElementById('blue').innerHTML = b;
+      document.getElementById('redValue').innerHTML = r;
+      document.getElementById('greenValue').innerHTML = g;
+      document.getElementById('blueValue').innerHTML = b;
     }
 
     reset();
@@ -52,9 +52,9 @@ window.onload = function(){
      var color = '#' + padZeros(r.toString(16),2) + padZeros(g.toString(16),2) + padZeros(b.toString(16),2);
      document.getElementById('yourColor').style.backgroundColor = color;
 
-      // document.getElementById('red').innerHTML = r;
-      // document.getElementById('green').innerHTML = g;
-      // document.getElementById('blue').innerHTML = b;
+      document.getElementById('redValue').innerHTML = r;
+      document.getElementById('greenValue').innerHTML = g;
+      document.getElementById('blueValue').innerHTML = b;
     }
 
     function randomColor(){
@@ -105,11 +105,17 @@ window.onload = function(){
       var actual = document.getElementById('toFind').style.backgroundColor;
       yours = rgb2hex(yours);
       actual = rgb2hex(actual);
-      var score = 200000 - computeDistance(yours,actual);
+      //var score = 200000 - computeDistance(yours,actual);
+      // document.getElementById('result').innerHTML = "Score: " + score;
+      var fragment = document.createDocumentFragment();
+      var scoreBoard = document.getElementById('scoreBoard');
+      var li = document.createElement("li");
+      li.appendChild(document.createTextNode(helpText(yours, actual)));
+      fragment.appendChild(li);
+      scoreBoard.appendChild(fragment);
 
-      document.getElementById('result').innerHTML = "Score: " + score;
-      document.getElementById('resultText').innerHTML = resultText(score);
-      document.getElementById('helpText').innerHTML = helpText(yours, actual);
+      //document.getElementById('resultText').innerHTML = resultText(score);
+      //document.getElementById('helpText').innerHTML = helpText(yours, actual);
     };
 
     document.getElementById('newColor').onclick = reset;
@@ -242,7 +248,7 @@ window.onload = function(){
         if(rA > rY){
           return "Not Enough Red";
         }
-        return "I think you won...";
+        return "You matched it!";
       }
 
       if(Math.abs(gY-gA) === furthest){
