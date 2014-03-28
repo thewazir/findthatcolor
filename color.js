@@ -71,10 +71,10 @@ window.onload = function(){
         return "Some kind of color genius!";
       }
       if(score > 199500){
-        return "You're pretty good at this";
+        return "You're really good at this";
       }
       if(score > 198900){
-        return "So close! Yet... not close enough";
+        return "So close! Yet not close enough";
       }
       if(score > 198000){
         return "Good, but not great";
@@ -92,27 +92,33 @@ window.onload = function(){
         return "You're terrible at this!";
       }
       if(score > 150000){
-        return "You might as well give up at this point";
+        return "You might as well give up";
       }
       if(score > 100000){
-        return "Are you color-blind, or what?";
+        return "See the title of the game?";
       }
       return "You're bad and you should feel bad";
     }
 
     document.getElementById('found').onclick = function(){
+      var helpTextNode = document.getElementById("helpText");
+      var resultTextNode = document.getElementById("resultText");
+      var scoreNode = document.getElementById("score");
       var yours = document.getElementById('yourColor').style.backgroundColor;
       var actual = document.getElementById('toFind').style.backgroundColor;
+      
       yours = rgb2hex(yours);
       actual = rgb2hex(actual);
-      //var score = 200000 - computeDistance(yours,actual);
-      // document.getElementById('result').innerHTML = "Score: " + score;
-      var fragment = document.createDocumentFragment();
-      var scoreBoard = document.getElementById('scoreBoard');
-      var li = document.createElement("li");
-      li.appendChild(document.createTextNode(helpText(yours, actual)));
-      fragment.appendChild(li);
-      scoreBoard.appendChild(fragment);
+    
+      var score = 200000 - computeDistance(yours,actual);
+      
+      // helpTextNode.appendChild(document.createTextNode(helpText(yours, actual)))  helpTextNode
+      helpTextNode.innerHTML = helpText(yours, actual);
+      resultTextNode.innerHTML = resultText(score);
+      scoreNode.innerHTML = "Score: " + score;
+      
+      // li.appendChild(document.createTextNode(resultText(score)));
+      // li.appendChild(document.createTextNode("Score: " + score));
 
       //document.getElementById('resultText').innerHTML = resultText(score);
       //document.getElementById('helpText').innerHTML = helpText(yours, actual);
